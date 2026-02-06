@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ammu & You | Wedding Invite</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --deep-purple: #4B0082;
+            --soft-pink: #fff0f5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--soft-pink);
+            font-family: 'Georgia', serif;
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* 1. ANIMATED HEADER */
+        header {
+            padding: 60px 20px;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+                        url('https://www.transparenttextures.com/patterns/floral-paper.png');
+        }
+
+        h1 { font-size: 3rem; color: var(--deep-purple); margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; letter-spacing: 3px; color: var(--gold); }
+
+        /* 2. LIVE COUNTDOWN SECTION */
+        #countdown-container {
+            background: var(--deep-purple);
+            color: white;
+            padding: 30px 0;
+            margin: 20px 0;
+        }
+        .timer { display: flex; justify-content: center; gap: 20px; font-size: 1.5rem; }
+        .time-box span { display: block; font-size: 0.8rem; text-transform: uppercase; color: var(--gold); }
+
+        /* 3. GOOGLE MAPS / VENUE SECTION */
+        .section { padding: 40px 20px; max-width: 600px; margin: auto; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-maps { background: #4285F4; color: white; }
+        .btn-ar { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+
+        /* 4. DIGITAL GUESTBOOK UI */
+        #guestbook {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        textarea { width: 100%; border: 1px solid #ddd; border-radius: 10px; padding: 10px; margin-bottom: 10px; }
+
+        .floral-divider { font-size: 2rem; color: var(--gold); margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="subtitle">WE ARE GETTING MARRIED</div>
+        <h1>Ammu & Vish</h1>
+        <div class="floral-divider">❦</div>
+        <p>Save the Date: <b>February 26, 2026</b></p>
+    </header>
+
+    <div id="countdown-container">
+        <p>The Magic Begins In:</p>
+        <div class="timer">
+            <div class="time-box"><div id="days">00</div><span>Days</span></div>
+            <div class="time-box"><div id="hours">00</div><span>Hrs</span></div>
+            <div class="time-box"><div id="mins">00</div><span>Mins</span></div>
+            <div class="time-box"><div id="secs">00</div><span>Secs</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>The Celebration</h3>
+        <p>AMR Unati, Karimnagar</p>
+        <a href="https://maps.app.goo.gl/VR5Koo9vz7avgB2p6" target="_blank" class="btn btn-maps">📍 Open in Google Maps</a>
+        <br>
+        <a href="https://www.instagram.com/ar_filters" target="_blank" class="btn btn-ar">📸 Open Wedding AR Filter</a>
+        <p style="font-size: 0.8rem; color: #777;">(Scan to use our custom wedding theme on Instagram!)</p>
+    </div>
+
+    <div class="section" id="guestbook">
+        <h3>Digital Guestbook</h3>
+        <p>Leave a voice note or a message for the couple!</p>
+        <textarea placeholder="Write your wishes here..."></textarea>
+        <button class="btn" style="background: var(--gold); color: white;" onclick="alert('Message Sent!')">Send Wishes</button>
+        <button class="btn" style="background: #333; color: white;">🎤 Record Voice Note</button>
+    </div>
+
+    <script>
+        // COUNTDOWN SCRIPT
+        const weddingDate = new Date("Feb 26, 2026 11:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("mins").innerHTML = minutes;
+            document.getElementById("secs").innerHTML = seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown-container").innerHTML = "TODAY IS THE DAY!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
